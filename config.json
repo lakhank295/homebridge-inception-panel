@@ -1,0 +1,22 @@
+{
+    "bridge": {
+        "name": "Homebridge 7192",
+        "username": "0E:42:14:93:71:92",
+        "port": 51907,
+        "pin": "359-74-292"
+    },
+    "accessories": [
+        {
+            "accessory": "Customer",
+            "name": "Customer Name",
+            "type": "Admin"
+        }
+    ],
+    "platforms": [
+        {
+            "name": "Config",
+            "port": 8581,
+            "platform": "config"
+        }
+    ]
+}
