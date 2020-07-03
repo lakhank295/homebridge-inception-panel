@@ -61,7 +61,7 @@ InceptionSwitch.prototype._setOn = function(on, callback) {
 
   this.log("Setting switch to " + on);
 
-    var res = request(this.http_method, this.url, {});
+    var res = request('http://dummy.restapiexample.com/api/v1/employees', 'GET', {});
  
     if(res.status == 'success') {
         this.log(res.data)
