@@ -61,13 +61,11 @@ InceptionSwitch.prototype._setOn = function(on, callback) {
 
   this.log("Setting switch to " + on);
 
-    var res = request('http://dummy.restapiexample.com/api/v1/employees', 'GET', {});
- 
-    if(res.status == 'success') {
-        this.log("res from " + res.data)
-    } else {
-        this.log("res from " + res)
-    }
+    request('http://dummy.restapiexample.com/api/v1/employees', { json: true }, (err, res, body) => {
+        if (err) { return this.log(err); }
+        this.log('res' + res)
+        this.log('res' + body)
+    });
 
   if (on && !this.reverse && !this.stateful) {
     setTimeout(function() {
