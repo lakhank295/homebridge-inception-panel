@@ -1,5 +1,5 @@
 {
-  "name": "homebridge-inception-panel",
+  "name": "@lakhan2951/homebridge-inception-panel",
   "version": "1.0.9",
   "description": "Inception Panel Controller for Homebridge",
   "license": "ISC",
@@ -19,7 +19,7 @@
     "homebridge": ">=0.4.0"
   },
   "dependencies": {
-    "homebridge-http-base": "~2.1.8"
+    "node-persist": "^2.1.0"
   },
   "devDependencies": {
     "homebridge": "^1.0.4"
