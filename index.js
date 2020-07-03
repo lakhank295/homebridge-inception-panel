@@ -65,7 +65,6 @@ InceptionSwitch.prototype._setOn = function(on, callback) {
   requestHttp("http://dummy.restapiexample.com/api/v1/employees", { json: true }, (err, res, body) => {
         if (err) { return this.log(err); }
         this.log('res' + JSON. stringify(body.data))
-        alert(JSON. stringify(body.data))
     });
 
   if (on && !this.reverse && !this.stateful) {
