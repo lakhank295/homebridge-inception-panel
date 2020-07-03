@@ -59,7 +59,7 @@ function authUser () {
     
     request(options, function (error, response) {
         if (error) throw new Error(error);
-        
+        this.log(JSON.stringify(response))
         let temp = response.body.Response;
 
         if(temp.Result == 'Success' && temp.Message == 'OK') {
