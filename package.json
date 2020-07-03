@@ -1,6 +1,6 @@
 {
   "name": "homebridge-inception",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Inception Panel Controller for Homebridge",
   "license": "ISC",
   "main": "index.js",
@@ -20,8 +20,7 @@
   },
   "dependencies": {
     "node-persist": "^2.1.0",
-    "request": "^2.88.2",
-    "sync-request": "2.2.0"
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "homebridge": "^1.0.4"

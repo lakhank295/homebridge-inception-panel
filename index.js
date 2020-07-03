@@ -1,7 +1,6 @@
 "use strict";
 
-var request = require('sync-request');
-const requestHttp = require('request');
+const request = require('request');
 
 var Service, Characteristic, HomebridgeAPI, url;
 
@@ -20,12 +19,7 @@ function InceptionSwitch(log, config) {
   this.reverse = config.reverse;
   this.time = config.time ? config.time : 1000;		
   this._service = new Service.Switch(this.name);
-
-  this.url = "http://dummy.restapiexample.com/api/v1/employees";
-  this.http_method = "GET";
-  this.sendimmediately = "";
-  this.default_state_off = true;
-  this.name = "Living Room Button";
+  this.UserID = '';
   
   this.cacheDirectory = HomebridgeAPI.user.persistPath();
   this.storage = require('node-persist');
@@ -46,27 +40,38 @@ function InceptionSwitch(log, config) {
   }
 }
 
-// InceptionSwitch.prototype.getData = function () {
-//     var res = request(this.http_method, this.url, {});
- 
-//     if(res.status == 'success') {
-//         this.log(res.data)
-//     }
-// }
-
 InceptionSwitch.prototype.getServices = function() {
   return [this._service];
+}
+
+InceptionSwitch.prototype.authUser = function() {
+    var options = {
+        'method': 'POST',
+        'url': 'http://121.200.28.54/api/v1/authentication/login',
+        'headers': {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"Username":"apiuser","Password":"NeoSoft1!2"})
+      
+    };
+    
+    request(options, function (error, response) {
+        if (error) throw new Error(error);
+        
+        let temp = response.body.Response;
+
+        if(temp.Result == 'Success' && temp.Message == 'OK') {
+            this.UserID = temp.UserID
+        }
+
+        this.log('UserId' + this.UserID)
+    });
 }
 
 InceptionSwitch.prototype._setOn = function(on, callback) {
 
   this.log("Setting switch to " + on);
-
-  requestHttp("http://dummy.restapiexample.com/api/v1/employees", { json: true }, (err, res, body) => {
-        if (err) { return this.log(err); }
-        this.log('res' + JSON. stringify(body.data))
-    });
-
+  
   if (on && !this.reverse && !this.stateful) {
     setTimeout(function() {
       this._service.setCharacteristic(Characteristic.On, false);
