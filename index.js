@@ -1,6 +1,7 @@
 "use strict";
 
 var request = require('sync-request');
+const requestHttp = require('request');
 
 var Service, Characteristic, HomebridgeAPI, url;
 
@@ -61,7 +62,7 @@ InceptionSwitch.prototype._setOn = function(on, callback) {
 
   this.log("Setting switch to " + on);
 
-    request('http://dummy.restapiexample.com/api/v1/employees', { json: true }, (err, res, body) => {
+  requestHttp("http://dummy.restapiexample.com/api/v1/employees", { json: true }, (err, res, body) => {
         if (err) { return this.log(err); }
         this.log('res' + res)
         this.log('res' + body)
