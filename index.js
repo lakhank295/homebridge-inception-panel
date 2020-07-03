@@ -42,37 +42,34 @@ function InceptionSwitch(log, config) {
 }
 
 InceptionSwitch.prototype.getServices = function() {
-    var options = {
-        'method': 'POST',
-        'url': 'http://121.200.28.54/api/v1/authentication/login',
-        'headers': {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({"Username":"apiuser","Password":"NeoSoft1!2"})
-      
-    };
-    
-    request(options, function (error, response) {
-        if (error) throw new Error(error);
-        
-        this.log('response' + response)
-
-        // let temp = response.body.Response;
-
-        // if(temp.Result == 'Success' && temp.Message == 'OK') {
-        //     this.UserID = temp.UserID
-        // }
-
-    });
-    
-    this.log('UserId' + this.UserID)
-
   return [this._service];
 }
 
 InceptionSwitch.prototype._setOn = function(on, callback) {
 
   this.log("Setting switch to " + on);
+
+    var options = {
+        'method': 'POST',
+        'url': 'http://121.200.28.54/api/v1/authentication/login',
+        'headers': {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"Username":"apiuser","Password":"NeoSoft1!2"})
+    };
+
+    request(options, function (error, response) {
+        if (error) throw new Error(error);
+
+        let temp = response.body.Response;
+
+        if(temp.Result == 'Success' && temp.Message == 'OK') {
+            this.UserID = temp.UserID
+        }
+        this.log(JSON.stringify(response))
+    });
+
+    this.log('UserID', this.UserID)
   
   if (on && !this.reverse && !this.stateful) {
     setTimeout(function() {
