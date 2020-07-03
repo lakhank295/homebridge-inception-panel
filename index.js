@@ -55,21 +55,20 @@ InceptionSwitch.prototype._setOn = function(on, callback) {
         'headers': {
         'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"Username":"apiuser","Password":"NeoSoft1!2"})
+        body: JSON.stringify({"Username":"Neosoft","Password":"NeoSoft1!2"})
     };
 
+    let temp;
     request(options, function (error, response) {
         if (error) throw new Error(error);
-
+        temp = response
         // let temp = response.body.Response;
 
         // if(temp.Result == 'Success' && temp.Message == 'OK') {
         //     this.UserID = temp.UserID
         // }
-        this.log('Response =>',JSON.stringify(response))
     });
-
-    this.log('UserID', this.UserID)
+    this.log("temp " + temp);
   
   if (on && !this.reverse && !this.stateful) {
     setTimeout(function() {
