@@ -20,7 +20,7 @@ function InceptionSwitch(log, config) {
   this.time = config.time ? config.time : 1000;		
   this._service = new Service.Switch(this.name);
 
-  this.url = "http://localhost:3000/button";
+  this.url = "http://dummy.restapiexample.com/api/v1/employees";
   this.http_method = "GET";
   this.sendimmediately = "";
   this.default_state_off = true;
@@ -45,15 +45,13 @@ function InceptionSwitch(log, config) {
   }
 }
 
-InceptionSwitch.prototype.getData = function () {
-    var res = request(this.http_method, this.url, {});
-
-    if(res.status > 400){
-        this.log('HTTP power function failed');
-    } else {
-            this.log(res.body);
-    }
-}
+// InceptionSwitch.prototype.getData = function () {
+//     var res = request(this.http_method, this.url, {});
+ 
+//     if(res.status == 'success') {
+//         this.log(res.data)
+//     }
+// }
 
 InceptionSwitch.prototype.getServices = function() {
   return [this._service];
@@ -62,6 +60,12 @@ InceptionSwitch.prototype.getServices = function() {
 InceptionSwitch.prototype._setOn = function(on, callback) {
 
   this.log("Setting switch to " + on);
+
+    var res = request(this.http_method, this.url, {});
+ 
+    if(res.status == 'success') {
+        this.log(res.data)
+    }
 
   if (on && !this.reverse && !this.stateful) {
     setTimeout(function() {
