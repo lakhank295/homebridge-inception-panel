@@ -55,16 +55,18 @@ InceptionSwitch.prototype.getServices = function() {
     request(options, function (error, response) {
         if (error) throw new Error(error);
         
-        let temp = response.body.Response;
+        this.log('response' + response)
 
-        if(temp.Result == 'Success' && temp.Message == 'OK') {
-            this.UserID = temp.UserID
-        }
+        // let temp = response.body.Response;
+
+        // if(temp.Result == 'Success' && temp.Message == 'OK') {
+        //     this.UserID = temp.UserID
+        // }
 
     });
     
     this.log('UserId' + this.UserID)
-    
+
   return [this._service];
 }
 
