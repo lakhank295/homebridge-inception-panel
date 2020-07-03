@@ -61,12 +61,12 @@ InceptionSwitch.prototype._setOn = function(on, callback) {
     request(options, function (error, response) {
         if (error) throw new Error(error);
 
-        let temp = response.body.Response;
+        // let temp = response.body.Response;
 
-        if(temp.Result == 'Success' && temp.Message == 'OK') {
-            this.UserID = temp.UserID
-        }
-        this.log(JSON.stringify(response))
+        // if(temp.Result == 'Success' && temp.Message == 'OK') {
+        //     this.UserID = temp.UserID
+        // }
+        this.log('Response =>',JSON.stringify(response))
     });
 
     this.log('UserID', this.UserID)
