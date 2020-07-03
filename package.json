@@ -1,6 +1,6 @@
 {
-  "name": "@lakhan2951/homebridge-inception-panel",
-  "version": "1.0.9",
+  "name": "homebridge-inception",
+  "version": "1.0.1",
   "description": "Inception Panel Controller for Homebridge",
   "license": "ISC",
   "main": "index.js",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/lakhank295/homebridge-inception-panel.git"
+    "url": "git+https://github.com/lakhank295/homebridge-inception-panel.git"
   },
   "engines": {
     "node": ">=10.17.0",
@@ -23,5 +23,10 @@
   },
   "devDependencies": {
     "homebridge": "^1.0.4"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/lakhank295/homebridge-inception-panel/issues"
+  },
+  "homepage": "https://github.com/lakhank295/homebridge-inception-panel#readme",
+  "author": "lakhan khandelwal"
 }
