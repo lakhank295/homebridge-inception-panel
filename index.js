@@ -39,14 +39,9 @@ function InceptionSwitch(log, config) {
 	}
   }
 
-  authUser();
 }
 
 InceptionSwitch.prototype.getServices = function() {
-  return [this._service];
-}
-
-function authUser () {
     var options = {
         'method': 'POST',
         'url': 'http://121.200.28.54/api/v1/authentication/login',
@@ -59,15 +54,17 @@ function authUser () {
     
     request(options, function (error, response) {
         if (error) throw new Error(error);
-        this.log(JSON.stringify(response))
+        
         let temp = response.body.Response;
 
         if(temp.Result == 'Success' && temp.Message == 'OK') {
             this.UserID = temp.UserID
         }
 
-        this.log('UserId' + this.UserID)
     });
+    
+    this.log('UserId' + this.UserID)
+  return [this._service];
 }
 
 InceptionSwitch.prototype._setOn = function(on, callback) {
