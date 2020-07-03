@@ -64,6 +64,7 @@ InceptionSwitch.prototype.getServices = function() {
     });
     
     this.log('UserId' + this.UserID)
+    
   return [this._service];
 }
 
