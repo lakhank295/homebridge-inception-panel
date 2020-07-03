@@ -38,13 +38,15 @@ function InceptionSwitch(log, config) {
 		this._service.setCharacteristic(Characteristic.On, true);
 	}
   }
+
+  authUser();
 }
 
 InceptionSwitch.prototype.getServices = function() {
   return [this._service];
 }
 
-InceptionSwitch.prototype.authUser = function() {
+function authUser () {
     var options = {
         'method': 'POST',
         'url': 'http://121.200.28.54/api/v1/authentication/login',
