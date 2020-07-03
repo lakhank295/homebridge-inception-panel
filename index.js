@@ -64,7 +64,9 @@ InceptionSwitch.prototype._setOn = function(on, callback) {
     var res = request('http://dummy.restapiexample.com/api/v1/employees', 'GET', {});
  
     if(res.status == 'success') {
-        this.log(res.data)
+        this.log("res from " + res.data)
+    } else {
+        this.log("res from " + res)
     }
 
   if (on && !this.reverse && !this.stateful) {
