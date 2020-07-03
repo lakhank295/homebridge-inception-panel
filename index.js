@@ -1,6 +1,8 @@
 "use strict";
 
-var Service, Characteristic, HomebridgeAPI;
+var request = require('sync-request');
+
+var Service, Characteristic, HomebridgeAPI, url;
 
 module.exports = function(homebridge) {
 
@@ -17,6 +19,12 @@ function InceptionSwitch(log, config) {
   this.reverse = config.reverse;
   this.time = config.time ? config.time : 1000;		
   this._service = new Service.Switch(this.name);
+
+  this.url = "http://localhost:3000/button";
+  this.http_method = "GET";
+  this.sendimmediately = "";
+  this.default_state_off = true;
+  this.name = "Living Room Button";
   
   this.cacheDirectory = HomebridgeAPI.user.persistPath();
   this.storage = require('node-persist');
@@ -35,6 +43,16 @@ function InceptionSwitch(log, config) {
 		this._service.setCharacteristic(Characteristic.On, true);
 	}
   }
+}
+
+InceptionSwitch.prototype.getData = function () {
+    var res = request(this.http_method, this.url, {});
+
+    if(res.status > 400){
+        this.log('HTTP power function failed');
+    } else {
+            this.log(res.body);
+    }
 }
 
 InceptionSwitch.prototype.getServices = function() {

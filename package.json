@@ -19,7 +19,8 @@
     "homebridge": ">=0.4.0"
   },
   "dependencies": {
-    "node-persist": "^2.1.0"
+    "node-persist": "^2.1.0",
+    "sync-request": "2.2.0"
   },
   "devDependencies": {
     "homebridge": "^1.0.4"
