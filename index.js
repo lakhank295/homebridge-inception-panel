@@ -35,11 +35,12 @@ class InceptionSwitch {
       data = response.body.Response;
     })
 
-    if(data.Result == 'Success' && data.Message == 'OK')  {
-      UserID = data.UserID
+    this.log('API Responjse =>', JSON.stringify(data))
+    // if(data.Result == 'Success' && data.Message == 'OK')  {
+    //   UserID = data.UserID
       
-      this.log('UserID => ', UserID)
-    }
+    //   this.log('UserID => ', UserID)
+    // }
 
   }
 
