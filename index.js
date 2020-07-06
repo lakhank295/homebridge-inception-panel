@@ -31,18 +31,17 @@ class InceptionSwitch {
     };
     
     request(options, async (error, response) => {
-        if (error) throw new Error(error);
-        
-        // UserID = temp.UserID
-        // this.log('==========> ', temp)
-        
+      if (error) throw new Error(error);
+  
       temp = JSON.parse(response.body);
 
-      // if(temp.Response.Result == 'Success' && temp.Response.Message == 'OK') {
-        UserID = temp.UserID
-      // }
+      UserID = temp.UserID
     })
 
+  }
+
+  getAllArea() {
+    this.log('ABABABAB', UserID)
   }
   
   getServices () {
