@@ -59,8 +59,8 @@ class InceptionSwitch {
     request(options, function (error, response) {
       areaId = response.body[0].ID;
 
-      this.log('Area ID =====> ', areaId)
     });
+
   }
   
   getServices () {
@@ -92,7 +92,7 @@ class InceptionSwitch {
   // Lock Handler
   setLockCharacteristicHandler (targetState, callback) {
     // var lockh = this;
-    this.log('=============>', UserID)
+    this.log('Area ID =====> ', areaId)
     if (targetState == Characteristic.LockCurrentState.SECURED) {
       this.log(`locking `+this.name, targetState)
       this.lockState = targetState
