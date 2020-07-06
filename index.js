@@ -63,7 +63,7 @@ class InceptionSwitch {
       // if(response.statusCode  == '')
       // this.log('AREA ID ', areaId)
       // this.log('AREA NAMe', areaName)
-      this.log('=======', response.body)
+      this.log('=======', response.body[0])
     });
 
   }
