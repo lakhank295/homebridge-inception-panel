@@ -38,7 +38,7 @@ class InceptionSwitch {
 
   getUserId(data) {
     if(data.Response.Result == 'Success' && data.Response.Message == 'OK') {
-        console.log('User ID => ',data.UserID)
+        this.log('User ID => ',data.UserID)
     }
   }
 
