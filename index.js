@@ -164,7 +164,7 @@ class InceptionSwitch {
     };
 
     request(options, function (error, response) {
-      let temp = JSON.parse(response.body) 
+      let temp = response.body
       this.log('temp', temp.ActivityID)
     });
 
