@@ -58,7 +58,7 @@ class InceptionSwitch {
 
     request(options, function (error, response) {
       // areaId = response.body[0].ID;
-      this.log('AREA', JSON.stringify(response))
+      this.log('AREA', JSON.parse(response))
     });
 
   }
