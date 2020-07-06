@@ -37,8 +37,9 @@ class InceptionSwitch {
       temp = JSON.parse(response.body);
 
       UserID = temp.UserID
+      this.log('==========> ', temp)
+      
     })
-    this.log('==========> ', JSON.stringify(temp))
   }
 
   getServices () {
