@@ -17,8 +17,6 @@ class InceptionSwitch {
     this.name = config['name'];
     this.lockService = new Service.LockMechanism(this.name);
     this.lockState = Characteristic.LockCurrentState.SECURED;
-
-    this.logInUser()
   }
 
   logInUser() {
@@ -32,7 +30,7 @@ class InceptionSwitch {
       body: JSON.stringify({"Username":"apiuser","Password":"NeoSoft1!2"})
     };
     
-    request(options, (error, response) => {
+    request(options, async (error, response) => {
         if (error) throw new Error(error);
         
         // UserID = temp.UserID
@@ -40,12 +38,12 @@ class InceptionSwitch {
         
       temp = JSON.parse(response.body);
 
-      if(temp.Response.Result == 'Success' && temp.Response.Message == 'OK') {
-        this.UserID = temp.UserID
-      }
+      // if(temp.Response.Result == 'Success' && temp.Response.Message == 'OK') {
+        UserID = temp.UserID
+      // }
     })
-    this.log('==========> ', this.UserID)
 
+    this.log('==========> ', UserID)
   }
 
   getServices () {
@@ -61,6 +59,8 @@ class InceptionSwitch {
       .on('get', this.getLockCharacteristicHandler.bind(this))
       .on('set', this.setLockCharacteristicHandler.bind(this));
 
+    this.logInUser();
+    
     return [informationService, this.lockService]
   }
 
