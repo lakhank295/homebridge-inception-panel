@@ -15,6 +15,8 @@ class InceptionSwitch {
     this.name = config['name'];
     this.lockService = new Service.LockMechanism(this.name);
     this.lockState = Characteristic.LockCurrentState.SECURED;
+
+    this.logInUser()
   }
 
   logInUser() {
@@ -34,7 +36,7 @@ class InceptionSwitch {
       UserID = temp.UserID
     })
 
-    this.log(UserID)
+    this.log('User ID => ',UserID)
   }
 
   getServices () {
