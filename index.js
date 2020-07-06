@@ -165,7 +165,7 @@ class InceptionSwitch {
 
     request(options, function (error, response) {
       resTemp = JSON.parse(response.body)
-      actId = temp.ActivityID
+      actId = resTemp.ActivityID
     });
 
     this.log('called =>', UserID)
