@@ -32,13 +32,13 @@ class InceptionSwitch {
       body: JSON.stringify({"Username":"apiuser","Password":"NeoSoft1!2"})
     };
     
-    request(options, function (error, response) {
+    request(options, (error, response) => {
         // if (error) throw new Error(error);
       temp = JSON.parse(response.body);
 
       UserID = temp.UserID
     })
-    this.log('==========> ',JSON.stringify(temp))
+    this.log('==========> ', JSON.stringify(temp))
   }
 
   getServices () {
