@@ -30,8 +30,10 @@ class InceptionSwitch {
 
     request(options, function (error, response) {
       if (error) throw new Error(error);
-
-      this.log('API Response => ',JSON.stringify(response))
+      
+      if(response !== null || response !== undefined || response !== '')  {
+        this.log('API Response => ', 1)
+      }
     })
 
   }
@@ -50,7 +52,7 @@ class InceptionSwitch {
       .on('set', this.setLockCharacteristicHandler.bind(this));
 
     this.getAuthData();
-    
+
     return [informationService, this.lockService]
   }
 
