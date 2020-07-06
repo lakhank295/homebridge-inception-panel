@@ -1,6 +1,6 @@
 "use strict";
 
-var Service, Characteristic
+var Service, Characteristic, UserId;
 const request = require('request');
 
 module.exports = (homebridge) => {
@@ -20,6 +20,7 @@ class InceptionSwitch {
 
   getAuthData () {
     var data;
+
     var options = {
       'method': 'POST',
       'url': 'http://121.200.28.54/api/v1/authentication/login',
@@ -31,11 +32,13 @@ class InceptionSwitch {
 
     request(options, function (error, response) {
       if (error) throw new Error(error);
-      data = response
+      data = response.body.Response;
     })
 
-    if(data !== null || data !== undefined || data !== '')  {
-      this.log('API Response => ', 1)
+    if(data.Result == 'Success' && data.Message == 'OK')  {
+      UserID = data.UserID
+      
+      this.log('UserID => ', UserID)
     }
 
   }
