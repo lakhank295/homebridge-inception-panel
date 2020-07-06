@@ -41,10 +41,10 @@ class InceptionSwitch {
       temp = JSON.parse(response.body);
 
       if(temp.Response.Result == 'Success' && temp.Response.Message == 'OK') {
-        UserID = temp.UserID
+        this.UserID = temp.UserID
       }
-      this.log('==========> ', UserID)
     })
+    this.log('==========> ', this.UserID)
 
   }
 
