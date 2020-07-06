@@ -22,6 +22,7 @@ class InceptionSwitch {
   }
 
   logInUser() {
+    let temp;
     var options = {
       'method': 'POST',
       'url': 'http://121.200.28.54/api/v1/authentication/login',
@@ -33,12 +34,11 @@ class InceptionSwitch {
     
     request(options, function (error, response) {
         // if (error) throw new Error(error);
-      let temp = JSON.parse(response.body);
+      temp = JSON.parse(response.body);
 
       UserID = temp.UserID
-      this.log('User ID => ',UserID)
     })
-
+    this.log('==========> ',JSON.stringify(temp))
   }
 
   getServices () {
