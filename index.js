@@ -29,10 +29,14 @@ class InceptionSwitch {
     };
     
     request(options, async function (error, response) {
-        if (error) throw new Error(error);
-    
-        await getUserId(JSON.parse(response.body))
-    })
+        // if (error) throw new Error(error);
+        
+        try {
+          await getUserId(JSON.parse(response.body))
+        } catch(e) {
+          throw new Error(e);
+        }
+      })
     
   }
 
