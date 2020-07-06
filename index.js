@@ -43,9 +43,9 @@ class InceptionSwitch {
       if(temp.Response.Result == 'Success' && temp.Response.Message == 'OK') {
         UserID = temp.UserID
       }
+      this.log('==========> ', UserID)
     })
 
-    this.log('==========> ', UserID)
   }
 
   getServices () {
