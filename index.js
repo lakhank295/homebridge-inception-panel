@@ -75,12 +75,13 @@ class InceptionSwitch {
         'Cookie': 'LoginSessId=' + UserID
       },
       body: JSON.stringify({"Type":"ControlArea","AreaControlType":"Arm"})
-    
+      
     };
     request(options, function (error, response) {
       // if (error) throw new Error(error);
       // console.log(response.body);
       let temp = JSON.parse(response.body) 
+      this.log('temp', temp)
       return temp
     });
     
@@ -152,7 +153,7 @@ class InceptionSwitch {
   // Lock Handler
   setLockCharacteristicHandler (targetState, callback) {
     // var lockh = this;
-    this.log(this.armArea())
+    this.log('hey',this.armArea())
     this.log('called =>', UserID)
     if (targetState == Characteristic.LockCurrentState.SECURED) {
       this.log(`locking `+this.name, targetState)
