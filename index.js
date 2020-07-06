@@ -17,6 +17,8 @@ class InceptionSwitch {
     this.name = config['name'];
     this.lockService = new Service.LockMechanism(this.name);
     this.lockState = Characteristic.LockCurrentState.SECURED;
+
+    this.logInUser();
   }
 
   logInUser() {
@@ -36,6 +38,10 @@ class InceptionSwitch {
       temp = JSON.parse(response.body);
 
       UserID = temp.UserID
+
+      if(UserID) {
+        this.getAllArea();
+      }
     })
 
   }
