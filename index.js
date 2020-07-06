@@ -152,8 +152,22 @@ class InceptionSwitch {
 
   // Lock Handler
   setLockCharacteristicHandler (targetState, callback) {
-    // var lockh = this;
-    this.log('hey',this.armArea())
+    var options = {
+      'method': 'POST',
+      'url': 'http://121.200.28.54/api/v1/control/area/' + areaId + '/activity',
+      'headers': {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Cookie': 'LoginSessId=' + UserID
+      },
+      body: JSON.stringify({"Type":"ControlArea","AreaControlType":"Arm"})
+    };
+    
+    request(options, function (error, response) {
+      let temp = response.body 
+      this.log('temp', temp)
+    });
+
     this.log('called =>', UserID)
     if (targetState == Characteristic.LockCurrentState.SECURED) {
       this.log(`locking `+this.name, targetState)
