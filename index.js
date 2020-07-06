@@ -1,5 +1,7 @@
 "use strict";
 
+const request = require('request');
+
 var Service, Characteristic, UserID;
 
 module.exports = (homebridge) => {
