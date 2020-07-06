@@ -19,29 +19,27 @@ class InceptionSwitch {
   }
 
   getAuthData () {
-    var data;
-
     var options = {
       'method': 'POST',
       'url': 'http://121.200.28.54/api/v1/authentication/login',
       'headers': {
-        'Content-Type': 'application/json'
+      'Content-Type': 'application/json'
       },
       body: JSON.stringify({"Username":"apiuser","Password":"NeoSoft1!2"})
     };
-
-    request(options, function (error, response) {
-      if (error) throw new Error(error);
-      data = response;
+    
+    request(options, async function (error, response) {
+        if (error) throw new Error(error);
+    
+        await getUserId(JSON.parse(response.body))
     })
+    
+  }
 
-    this.log('API Responjse =>', JSON.stringify(data))
-    // if(data.Result == 'Success' && data.Message == 'OK')  {
-    //   UserID = data.UserID
-      
-    //   this.log('UserID => ', UserID)
-    // }
-
+  getUserId(data) {
+    if(data.Response.Result == 'Success' && data.Response.Message == 'OK') {
+        console.log('User ID => ',data.UserID)
+    }
   }
 
   getServices () {
