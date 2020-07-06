@@ -1,6 +1,7 @@
 "use strict";
 
 var Service, Characteristic
+const request = require('request');
 
 module.exports = (homebridge) => {
   Service = homebridge.hap.Service
@@ -17,6 +18,24 @@ class InceptionSwitch {
     this.lockState = Characteristic.LockCurrentState.SECURED;
   }
 
+  getAuthData () {
+    var options = {
+      'method': 'POST',
+      'url': 'http://121.200.28.54/api/v1/authentication/login',
+      'headers': {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({"Username":"apiuser","Password":"NeoSoft1!2"})
+    };
+
+    request(options, function (error, response) {
+      if (error) throw new Error(error);
+
+      this.log('API Response => ',JSON.stringify(response))
+    })
+
+  }
+
   getServices () {
     const informationService = new Service.AccessoryInformation()
         .setCharacteristic(Characteristic.Manufacturer, 'Inner Range')
@@ -30,6 +49,8 @@ class InceptionSwitch {
       .on('get', this.getLockCharacteristicHandler.bind(this))
       .on('set', this.setLockCharacteristicHandler.bind(this));
 
+    this.getAuthData();
+    
     return [informationService, this.lockService]
   }
 
@@ -43,7 +64,7 @@ class InceptionSwitch {
 
   // Lock Handler
   setLockCharacteristicHandler (targetState, callback) {
-    var lockh = this;
+    // var lockh = this;
 
     if (targetState == Characteristic.LockCurrentState.SECURED) {
       this.log(`locking `+this.name, targetState)
