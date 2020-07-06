@@ -61,7 +61,9 @@ class InceptionSwitch {
       areaName = response.body[0].Name
       // let data = JSON.parse(response)
       // if(response.statusCode  == '')
-      this.log('AREA', areaId + '=' + areaName)
+      this.log('AREA ID ', areaId)
+      this.log('AREA NAMe', areaName)
+
     });
 
   }
