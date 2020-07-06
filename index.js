@@ -80,7 +80,7 @@ class InceptionSwitch {
     request(options, function (error, response) {
       // if (error) throw new Error(error);
       // console.log(response.body);
-      let temp = JSON.parse(response.body) 
+      let temp = response.body 
       this.log('temp', temp)
       return temp
     });
