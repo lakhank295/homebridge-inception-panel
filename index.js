@@ -162,10 +162,10 @@ class InceptionSwitch {
       },
       body: JSON.stringify({"Type":"ControlArea","AreaControlType":"Arm"})
     };
-    
+
     request(options, function (error, response) {
-      let temp = response.body 
-      this.log('temp', temp)
+      let temp = JSON.parse(response.body) 
+      this.log('temp', temp.ActivityID)
     });
 
     this.log('called =>', UserID)
