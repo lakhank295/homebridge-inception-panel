@@ -32,7 +32,7 @@ class InceptionSwitch {
 
     request(options, function (error, response) {
       if (error) throw new Error(error);
-      data = response.body.Response;
+      data = response;
     })
 
     this.log('API Responjse =>', JSON.stringify(data))
