@@ -36,9 +36,9 @@ class InceptionSwitch {
       let temp = JSON.parse(response.body);
 
       UserID = temp.UserID
+      this.log('User ID => ',UserID)
     })
 
-    this.log('User ID => ',UserID)
   }
 
   getServices () {
