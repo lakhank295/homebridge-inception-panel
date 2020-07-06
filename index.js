@@ -2,7 +2,7 @@
 
 const request = require('request');
 
-var Service, Characteristic, UserID, areaId; areaName;
+var Service, Characteristic, UserID, areaId, areaName;
 
 module.exports = (homebridge) => {
   Service = homebridge.hap.Service
@@ -57,7 +57,7 @@ class InceptionSwitch {
     };
 
     request(options, (error, response) => {
-      areaId = response.body[0].ID;
+      areaId = response.body[0].ID
       areaName = response.body[0].Name
       // let data = JSON.parse(response)
       // if(response.statusCode  == '')
