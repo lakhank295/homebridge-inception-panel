@@ -1,10 +1,10 @@
 "use strict";
 
 var Service, Characteristic, UserID;
+
 const request = require('request');
 
 module.exports = (homebridge) => {
-  UserID;
   Service = homebridge.hap.Service
   Characteristic = homebridge.hap.Characteristic
   homebridge.registerAccessory('homebridge-inception', 'InceptionSwitch', InceptionSwitch)
@@ -19,34 +19,34 @@ class InceptionSwitch {
     this.lockState = Characteristic.LockCurrentState.SECURED;
   }
 
-  getAuthData () {
-    var options = {
-      'method': 'POST',
-      'url': 'http://121.200.28.54/api/v1/authentication/login',
-      'headers': {
-      'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({"Username":"apiuser","Password":"NeoSoft1!2"})
-    };
+  // getAuthData () {
+  //   var options = {
+  //     'method': 'POST',
+  //     'url': 'http://121.200.28.54/api/v1/authentication/login',
+  //     'headers': {
+  //     'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({"Username":"apiuser","Password":"NeoSoft1!2"})
+  //   };
     
-    request(options, async function (error, response) {
-        // if (error) throw new Error(error);
+  //   request(options, async function (error, response) {
+  //       // if (error) throw new Error(error);
         
-        try {
-          await this.getUserId(JSON.parse(response.body))
-        } catch(e) {
-          // throw new Error(e);
-        }
-      })
+  //       try {
+  //         await this.getUserId(JSON.parse(response.body))
+  //       } catch(e) {
+  //         // throw new Error(e);
+  //       }
+  //     })
     
-  }
+  // }
 
-  getUserId(data) {
-    if(data.Response.Result == 'Success' && data.Response.Message == 'OK') {
-        // this.log('User ID => ',data.UserID)
-      this.UserID = data.UserID
-    }
-  }
+  // getUserId(data) {
+  //   if(data.Response.Result == 'Success' && data.Response.Message == 'OK') {
+  //       // this.log('User ID => ',data.UserID)
+  //     this.UserID = data.UserID
+  //   }
+  // }
 
   getServices () {
     const informationService = new Service.AccessoryInformation()
@@ -61,7 +61,23 @@ class InceptionSwitch {
       .on('get', this.getLockCharacteristicHandler.bind(this))
       .on('set', this.setLockCharacteristicHandler.bind(this));
 
-    this.getAuthData();
+
+      var options = {
+        'method': 'POST',
+        'url': 'http://121.200.28.54/api/v1/authentication/login',
+        'headers': {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"Username":"apiuser","Password":"NeoSoft1!2"})
+      };
+      
+      request(options, function (error, response) {
+          // if (error) throw new Error(error);
+          
+        let temp = JSON.parse(response.body);
+
+        UserID = temp.UserID
+      })
 
     return [informationService, this.lockService]
   }
@@ -90,7 +106,7 @@ class InceptionSwitch {
       this.log(this.lockState+" "+this.name);
     }
 
-    this.log('Bro',this.UserID)
+    this.log('Bro', UserID)
     callback();
   }
 
