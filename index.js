@@ -1,6 +1,6 @@
 "use strict";
 
-var Service, Characteristic, UserID;
+var Service, Characteristic, UserID, areaId;
 
 const request = require('request');
 
@@ -48,6 +48,65 @@ class InceptionSwitch {
   //   }
   // }
 
+  getAllVisibleArea() {
+    var options = {
+      'method': 'GET',
+      'url': 'http://121.200.28.54/api/v1/control/area',
+      'headers': {
+        'Accept': 'application/json',
+        'Cookie': 'LoginSessId=' + UserID
+      }
+    };
+
+    request(options, function (error, response) {
+      // if (error) throw new Error(error);
+      // this.log(response.body);
+      areaId = response.body[0].ID;
+    });
+  }
+
+  armArea() {
+    var options = {
+      'method': 'POST',
+      'url': 'http://121.200.28.54/api/v1/control/area/' + areaId + '/activity',
+      'headers': {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Cookie': 'LoginSessId=' + UserID
+      },
+      body: JSON.stringify({"Type":"ControlArea","AreaControlType":"Arm"})
+    
+    };
+    request(options, function (error, response) {
+      // if (error) throw new Error(error);
+      // console.log(response.body);
+      let temp = JSON.parse(response.body) 
+      return temp
+    });
+    
+  }
+
+  disArmArea() {
+    var options = {
+      'method': 'POST',
+      'url': 'http://121.200.28.54/api/v1/control/area/' + areaId + '/activity',
+      'headers': {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Cookie': 'LoginSessId=' + UserID
+      },
+      body: JSON.stringify({"Type":"ControlArea","AreaControlType":"Disarm"})
+    
+    };
+    request(options, function (error, response) {
+      // if (error) throw new Error(error);
+      // console.log(response.body);
+      let temp = JSON.parse(response.body) 
+      return temp
+    });
+    
+  }
+
   getServices () {
     const informationService = new Service.AccessoryInformation()
         .setCharacteristic(Characteristic.Manufacturer, 'Inner Range')
@@ -93,7 +152,8 @@ class InceptionSwitch {
   // Lock Handler
   setLockCharacteristicHandler (targetState, callback) {
     // var lockh = this;
-
+    this.log(this.armArea())
+    this.log('called =>', UserID)
     if (targetState == Characteristic.LockCurrentState.SECURED) {
       this.log(`locking `+this.name, targetState)
       this.lockState = targetState
@@ -106,7 +166,6 @@ class InceptionSwitch {
       this.log(this.lockState+" "+this.name);
     }
 
-    this.log('Bro', UserID)
     callback();
   }
 
