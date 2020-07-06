@@ -59,8 +59,7 @@ class InceptionSwitch {
         .on('set', this.setLockCharacteristicHandler.bind(this));
         
         this.logInUser();
-        this.log('==========> ', UserID)
-        
+
     return [informationService, this.lockService]
   }
 
@@ -75,7 +74,7 @@ class InceptionSwitch {
   // Lock Handler
   setLockCharacteristicHandler (targetState, callback) {
     // var lockh = this;
-
+    this.log('=============>', UserID)
     if (targetState == Characteristic.LockCurrentState.SECURED) {
       this.log(`locking `+this.name, targetState)
       this.lockState = targetState
