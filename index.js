@@ -57,13 +57,14 @@ class InceptionSwitch {
     };
 
     request(options, (error, response) => {
-      // areaId = response.body[0].ID
-      // areaName = response.body[0].Name
-      // let data = JSON.parse(response)
-      // if(response.statusCode  == '')
+      let temp = JSON.parse(response.body)
+      this.log('Temp =>', temp)
+
+      // areaId = temp[0].ID
+      // areaName = temp[0].Name
+     
       // this.log('AREA ID ', areaId)
       // this.log('AREA NAMe', areaName)
-      this.log('=======', JSON.parse(response.body[0]))
     });
 
   }
