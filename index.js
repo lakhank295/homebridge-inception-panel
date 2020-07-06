@@ -33,13 +33,19 @@ class InceptionSwitch {
     };
     
     request(options, (error, response) => {
-        // if (error) throw new Error(error);
+        if (error) throw new Error(error);
+        
+        // UserID = temp.UserID
+        // this.log('==========> ', temp)
+        
       temp = JSON.parse(response.body);
 
-      UserID = temp.UserID
-      this.log('==========> ', temp)
-      
+      if(temp.Response.Result == 'Success' && temp.Response.Message == 'OK') {
+        UserID = temp.UserID
+      }
     })
+
+    this.log('==========> ', UserID)
   }
 
   getServices () {
