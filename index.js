@@ -1,9 +1,10 @@
 "use strict";
 
-var Service, Characteristic, UserId;
+var Service, Characteristic, UserID;
 const request = require('request');
 
 module.exports = (homebridge) => {
+  UserID;
   Service = homebridge.hap.Service
   Characteristic = homebridge.hap.Characteristic
   homebridge.registerAccessory('homebridge-inception', 'InceptionSwitch', InceptionSwitch)
@@ -42,7 +43,8 @@ class InceptionSwitch {
 
   getUserId(data) {
     if(data.Response.Result == 'Success' && data.Response.Message == 'OK') {
-        this.log('User ID => ',data.UserID)
+        // this.log('User ID => ',data.UserID)
+      this.UserID = data.UserID
     }
   }
 
@@ -87,6 +89,8 @@ class InceptionSwitch {
       this.updateCurrentState(this.lockState);
       this.log(this.lockState+" "+this.name);
     }
+
+    this.log('Bro',this.UserID)
     callback();
   }
 
