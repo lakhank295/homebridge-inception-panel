@@ -59,7 +59,8 @@ class InceptionSwitch {
     request(options, (error, response) => {
       // areaId = response.body[0].ID;
       // let data = JSON.parse(response)
-      this.log('AREA', JSON.stringify(response))
+      // if(response.statusCode  == '')
+      this.log('AREA', response)
     });
 
   }
