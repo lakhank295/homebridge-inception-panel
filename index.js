@@ -19,6 +19,7 @@ class InceptionSwitch {
   }
 
   getAuthData () {
+    var data;
     var options = {
       'method': 'POST',
       'url': 'http://121.200.28.54/api/v1/authentication/login',
@@ -30,11 +31,12 @@ class InceptionSwitch {
 
     request(options, function (error, response) {
       if (error) throw new Error(error);
-      
-      if(response !== null || response !== undefined || response !== '')  {
-        this.log('API Response => ', 1)
-      }
+      data = response
     })
+
+    if(data !== null || data !== undefined || data !== '')  {
+      this.log('API Response => ', 1)
+    }
 
   }
 
