@@ -43,24 +43,24 @@ class InceptionSwitch {
       // }
     })
 
-    this.log('==========> ', UserID)
   }
-
+  
   getServices () {
     const informationService = new Service.AccessoryInformation()
         .setCharacteristic(Characteristic.Manufacturer, 'Inner Range')
         .setCharacteristic(Characteristic.Model, 'Inception Lock 1.0')
         .setCharacteristic(Characteristic.SerialNumber, '1234');
 
-    this.lockService.getCharacteristic(Characteristic.LockCurrentState)
-      .on('get', this.getLockCharacteristicHandler.bind(this));
-
-    this.lockService.getCharacteristic(Characteristic.LockTargetState)
-      .on('get', this.getLockCharacteristicHandler.bind(this))
-      .on('set', this.setLockCharacteristicHandler.bind(this));
-
-    this.logInUser();
-    
+        this.lockService.getCharacteristic(Characteristic.LockCurrentState)
+        .on('get', this.getLockCharacteristicHandler.bind(this));
+        
+        this.lockService.getCharacteristic(Characteristic.LockTargetState)
+        .on('get', this.getLockCharacteristicHandler.bind(this))
+        .on('set', this.setLockCharacteristicHandler.bind(this));
+        
+        this.logInUser();
+        this.log('==========> ', UserID)
+        
     return [informationService, this.lockService]
   }
 
