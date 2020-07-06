@@ -2,7 +2,7 @@
 
 const request = require('request');
 
-var Service, Characteristic, UserID;
+var Service, Characteristic, UserID, areaId;
 
 module.exports = (homebridge) => {
   Service = homebridge.hap.Service
@@ -47,7 +47,20 @@ class InceptionSwitch {
   }
 
   getAllArea() {
-    this.log('ABABABAB', UserID)
+    var options = {
+      'method': 'GET',
+      'url': 'http://121.200.28.54/api/v1/control/area',
+      'headers': {
+        'Accept': 'application/json',
+        'Cookie': 'LoginSessId=' + UserID
+      }
+    };
+
+    request(options, function (error, response) {
+      areaId = response.body[0].ID;
+
+      this.log('Area ID =====> ', areaId)
+    });
   }
   
   getServices () {
