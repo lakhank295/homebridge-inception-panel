@@ -32,7 +32,7 @@ class InceptionSwitch {
         // if (error) throw new Error(error);
         
         try {
-          await getUserId(JSON.parse(response.body))
+          await this.getUserId(JSON.parse(response.body))
         } catch(e) {
           // throw new Error(e);
         }
