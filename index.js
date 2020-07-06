@@ -1,6 +1,6 @@
 "use strict";
 
-var Service, Characteristic, UserID, areaId, actId;
+var Service, Characteristic, UserID, areaId, actId, resTemp;
 
 const request = require('request');
 
@@ -164,12 +164,12 @@ class InceptionSwitch {
     };
 
     request(options, function (error, response) {
-      let temp = JSON.parse(response.body)
+      resTemp = JSON.parse(response.body)
       actId = temp.ActivityID
     });
 
     this.log('called =>', UserID)
-    this.log('Activity ID', actId)
+    this.log('Activity ID', JSON.stringify(resTemp))
 
     if (targetState == Characteristic.LockCurrentState.SECURED) {
       this.log(`locking `+this.name, targetState)
