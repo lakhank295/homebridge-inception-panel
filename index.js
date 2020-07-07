@@ -63,7 +63,7 @@ class InceptionSwitch {
       allArea = temp
       // areaId = temp[0].ID
       // areaName = temp[0].Name
-      // this.armArea();
+      this.armArea();
     });
 
   }
