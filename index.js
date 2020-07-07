@@ -86,7 +86,7 @@ class InceptionSwitch {
     };
     request(options, (error, response) => {
       // if (error) throw new Error(error);
-      let temp = response.body.Response
+      let temp = response.body
 
       this.testResponse(temp)
     });
@@ -94,7 +94,7 @@ class InceptionSwitch {
   }
   
   testResponse(data) {
-    this.log('temp========>', data)
+    this.log('temp========>', data.Response)
 
   }
   
