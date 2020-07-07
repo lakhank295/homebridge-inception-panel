@@ -1,7 +1,7 @@
 "use strict";
 
 const request = require('request');
-var Service, Characteristic, UserID, areaId, areaName, allArea;
+var Service, Characteristic, UserID, areaId, areaName, allArea, armedRes;
 
 module.exports = (homebridge) => {
   Service = homebridge.hap.Service
@@ -61,8 +61,7 @@ class InceptionSwitch {
       let temp = JSON.parse(response.body)
 
       allArea = temp
-      // areaId = temp[0].ID
-      // areaName = temp[0].Name
+      
       // this.armArea();
     });
 
@@ -87,8 +86,7 @@ class InceptionSwitch {
     request(options, (error, response) => {
       if (error) throw new Error(error);
 
-      let temp = response.body
-      return JSON.parse(temp)
+      armedRes = JSON.parse(response.body)
     });
     
   }
@@ -127,8 +125,8 @@ class InceptionSwitch {
   // Lock Handler
   setLockCharacteristicHandler (targetState, callback) {
     if (targetState == Characteristic.LockCurrentState.SECURED) {
-      let armData = this.armArea();
-      this.log('Arrma ======>', armData)
+      this.armArea();
+      this.log('Arrma ======>', armedRes)
       this.log(`locking `+this.name, targetState)
       this.lockState = targetState
       this.updateCurrentState(this.lockState);
