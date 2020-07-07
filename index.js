@@ -1,25 +1,28 @@
 "use strict";
 
 const request = require('request');
-let conf = require('./config.json');
-var Service, Characteristic, UserID, areaId, areaName, allArea;
+var Service, Characteristic, UserID, areaId, areaName, allArea, UUIDGen;
 
 module.exports = (homebridge) => {
   Service = homebridge.hap.Service
   Characteristic = homebridge.hap.Characteristic
+  UUIDGen = homebridge.hap.uuid
   homebridge.registerAccessory('homebridge-inception', 'InceptionSwitch', InceptionSwitch)
 }
 
 class InceptionSwitch {
-  constructor (log, config) {
+  constructor (log, config, accessory) {
     // get config values
     this.log = log;
     this.name = config['name'];
     this.lockService = new Service.LockMechanism(this.name);
     this.lockState = Characteristic.LockCurrentState.SECURED;
+    var uuid = UUIDGen.generate(accessory.name);
+
+    this.log('UUID =======> ', uuid)
+    this.log('ACC =======> ', accessory)
 
     this.logInUser();
-    this.log('Config ======> ',conf)
   }
 
   logInUser() {
@@ -105,8 +108,6 @@ class InceptionSwitch {
 
   // Lock Handler
   setLockCharacteristicHandler (targetState, callback) {
-    // var lockh = this;
-    // this.log('Area ID =====> ', areaId)
     if (targetState == Characteristic.LockCurrentState.SECURED) {
       this.log(`locking `+this.name, targetState)
       this.lockState = targetState
