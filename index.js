@@ -82,10 +82,9 @@ class InceptionSwitch {
         'Content-Type': 'application/json',
         'Cookie': 'LoginSessId=' + UserID
       },
-
       body: JSON.stringify({"Type":"ControlArea","AreaControlType":"Arm"})
     };
-    request(options, function (error, response) {
+    request(options, (error, response) => {
       // if (error) throw new Error(error);
       let temp = response.body 
       this.testResponse(temp)
