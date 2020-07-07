@@ -86,7 +86,8 @@ class InceptionSwitch {
     };
     request(options, (error, response) => {
       // if (error) throw new Error(error);
-      let temp = response.body 
+      let temp = response.body.Response
+
       this.testResponse(temp)
     });
     
