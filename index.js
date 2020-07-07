@@ -94,7 +94,7 @@ class InceptionSwitch {
   }
   
   testResponse(data) {
-    this.log('temp========>', data.Response)
+    this.log('temp========>', data)
 
   }
   
