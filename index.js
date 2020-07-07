@@ -63,16 +63,34 @@ class InceptionSwitch {
       allArea = temp
       // areaId = temp[0].ID
       // areaName = temp[0].Name
-      this.armArea();
+      // this.armArea();
     });
 
   }
 
   armArea() {
-    for(var i = 0; i < allArea.length; i++) {
-      this.log('ID =====>', allArea[i].ID)
-      this.log('NAME =====>', allArea[i].Name)
-    }
+    // for(var i = 0; i < allArea.length; i++) {
+    //   this.log('ID =====>', allArea[i].ID)
+    //   this.log('NAME =====>', allArea[i].Name)
+    // }
+
+    var options = {
+      'method': 'POST',
+      'url': 'http://121.200.28.54/api/v1/control/area/' + allArea[0].ID + '/activity',
+      'headers': {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Cookie': 'LoginSessId=' + UserID
+      },
+
+      body: JSON.stringify({"Type":"ControlArea","AreaControlType":"Arm"})
+    };
+    request(options, function (error, response) {
+      // if (error) throw new Error(error);
+      let temp = response.body 
+      this.log('temp========>', temp)
+    });
+    
   }
   
   getServices () {
@@ -104,6 +122,7 @@ class InceptionSwitch {
   // Lock Handler
   setLockCharacteristicHandler (targetState, callback) {
     if (targetState == Characteristic.LockCurrentState.SECURED) {
+      
       this.log(`locking `+this.name, targetState)
       this.lockState = targetState
       this.updateCurrentState(this.lockState);
