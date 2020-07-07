@@ -2,7 +2,7 @@
 
 const request = require('request');
 
-var Service, Characteristic, UserID, areaId, areaName;
+var Service, Characteristic, UserID, areaId, areaName, allArea;
 
 module.exports = (homebridge) => {
   Service = homebridge.hap.Service
@@ -59,13 +59,19 @@ class InceptionSwitch {
     request(options, (error, response) => {
       let temp = JSON.parse(response.body)
 
-      areaId = temp[0].ID
-      areaName = temp[0].Name
-     
-      this.log('AREA ID =>', areaId)
-      this.log('AREA NAMe =>', areaName)
+      allArea = temp
+      // areaId = temp[0].ID
+      // areaName = temp[0].Name
+      this.armArea();
     });
 
+  }
+
+  armArea() {
+    for(var i = 0; i < allArea.length; i++) {
+      this.log('ID =====>', allArea[i].ID)
+      this.log('NAME =====>', allArea[i].Name)
+    }
   }
   
   getServices () {
