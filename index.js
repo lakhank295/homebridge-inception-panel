@@ -57,6 +57,8 @@ class InceptionSwitch {
     };
 
     request(options, (error, response) => {
+      if (error) throw new Error(error);
+
       let temp = JSON.parse(response.body)
 
       allArea = temp
@@ -71,6 +73,10 @@ class InceptionSwitch {
     for(var i = 0; i < allArea.length; i++) {
       this.log('ID =====>', allArea[i].ID)
       this.log('NAME =====>', allArea[i].Name)
+
+      this.lockService.getCharacteristic(Characteristic.LockTargetState)
+      .on('get', this.getLockCharacteristicHandler.bind(this))
+      .on('set', this.setLockCharacteristicHandler.bind(this));
     }
   }
   
