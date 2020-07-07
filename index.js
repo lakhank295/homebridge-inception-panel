@@ -1,26 +1,21 @@
 "use strict";
 
 const request = require('request');
-var Service, Characteristic, UserID, areaId, areaName, allArea, UUIDGen;
+var Service, Characteristic, UserID, areaId, areaName, allArea;
 
 module.exports = (homebridge) => {
   Service = homebridge.hap.Service
   Characteristic = homebridge.hap.Characteristic
-  UUIDGen = homebridge.hap.uuid
   homebridge.registerAccessory('homebridge-inception', 'InceptionSwitch', InceptionSwitch)
 }
 
 class InceptionSwitch {
-  constructor (log, config, accessory) {
+  constructor (log, config) {
     // get config values
     this.log = log;
     this.name = config['name'];
     this.lockService = new Service.LockMechanism(this.name);
     this.lockState = Characteristic.LockCurrentState.SECURED;
-    var uuid = UUIDGen.generate(accessory.name);
-
-    this.log('UUID =======> ', uuid.toString())
-    this.log('ACC =======> ', accessory.toString())
 
     this.logInUser();
   }
