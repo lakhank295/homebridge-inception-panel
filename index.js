@@ -126,7 +126,9 @@ class InceptionSwitch {
   setLockCharacteristicHandler (targetState, callback) {
     if (targetState == Characteristic.LockCurrentState.SECURED) {
       this.armArea();
-      this.log('Arrma ======>', armedRes)
+      setTimeout(() => {
+        this.log('Arrma ======>', armedRes)
+      }, 1000);
       this.log(`locking `+this.name, targetState)
       this.lockState = targetState
       this.updateCurrentState(this.lockState);
