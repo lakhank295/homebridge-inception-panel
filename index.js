@@ -62,8 +62,8 @@ class InceptionSwitch {
       areaId = temp[0].ID
       areaName = temp[0].Name
      
-      this.log('AREA ID ', areaId)
-      this.log('AREA NAMe', areaName)
+      this.log('AREA ID =>', areaId)
+      this.log('AREA NAMe =>', areaName)
     });
 
   }
