@@ -88,9 +88,14 @@ class InceptionSwitch {
     request(options, function (error, response) {
       // if (error) throw new Error(error);
       let temp = response.body 
-      this.log('temp========>', temp)
+      this.testResponse(temp)
     });
     
+  }
+  
+  testResponse(data) {
+    this.log('temp========>', data)
+
   }
   
   getServices () {
