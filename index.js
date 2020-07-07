@@ -63,7 +63,7 @@ class InceptionSwitch {
       allArea = temp
       // areaId = temp[0].ID
       // areaName = temp[0].Name
-      this.armArea();
+      // this.armArea();
     });
 
   }
@@ -85,18 +85,18 @@ class InceptionSwitch {
       body: JSON.stringify({"Type":"ControlArea","AreaControlType":"Arm"})
     };
     request(options, (error, response) => {
-      // if (error) throw new Error(error);
-      let temp = response.body
+      if (error) throw new Error(error);
 
-      this.testResponse(temp)
+      let temp = response.body
+      return JSON.parse(temp)
     });
     
   }
   
-  testResponse(data) {
-    let tempData  = JSON.parse(data)
-    this.log('temp========>', tempData.Response)
-  }
+  // testResponse(data) {
+  //   let tempData  = JSON.parse(data)
+  //   return tempData
+  // }
   
   getServices () {
     const informationService = new Service.AccessoryInformation()
@@ -127,7 +127,8 @@ class InceptionSwitch {
   // Lock Handler
   setLockCharacteristicHandler (targetState, callback) {
     if (targetState == Characteristic.LockCurrentState.SECURED) {
-      
+      let armData = this.armArea();
+      this.log('Arrma ======>', armData)
       this.log(`locking `+this.name, targetState)
       this.lockState = targetState
       this.updateCurrentState(this.lockState);
