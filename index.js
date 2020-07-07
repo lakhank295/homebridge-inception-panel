@@ -19,8 +19,8 @@ class InceptionSwitch {
     this.lockState = Characteristic.LockCurrentState.SECURED;
     var uuid = UUIDGen.generate(accessory.name);
 
-    this.log('UUID =======> ', uuid)
-    this.log('ACC =======> ', accessory)
+    this.log('UUID =======> ', uuid.toString())
+    this.log('ACC =======> ', accessory.toString())
 
     this.logInUser();
   }
