@@ -95,7 +95,7 @@ class InceptionSwitch {
   
   testResponse(data) {
     let tempData  = JSON.parse(data)
-    this.log('temp========>', JSON.parse(tempData.Response))
+    this.log('temp========>', tempData.Response)
   }
   
   getServices () {
