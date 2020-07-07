@@ -94,9 +94,7 @@ class InceptionSwitch {
   }
   
   testResponse(data) {
-    this.log('Result =>', JSON.stringify(data));
-    this.log('temp========>', data.ActivityID)
-
+    this.log('temp========>', data.Response.Result)
   }
   
   getServices () {
