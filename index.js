@@ -1,7 +1,7 @@
 "use strict";
 
 const request = require('request');
-
+let conf = require('./config.json');
 var Service, Characteristic, UserID, areaId, areaName, allArea;
 
 module.exports = (homebridge) => {
@@ -19,6 +19,7 @@ class InceptionSwitch {
     this.lockState = Characteristic.LockCurrentState.SECURED;
 
     this.logInUser();
+    this.log('Config ======> ',conf)
   }
 
   logInUser() {
