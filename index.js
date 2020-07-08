@@ -134,7 +134,7 @@ class InceptionSwitch {
     if (targetState == Characteristic.LockCurrentState.SECURED) {
       // armedRes = this.armArea();
       await this.armArea()
-      this.log('Arrma ======>', armedRes)
+      this.log('Arrma ======', armedRes)
 
       this.log(`locking `+this.name, targetState)
       this.lockState = targetState
