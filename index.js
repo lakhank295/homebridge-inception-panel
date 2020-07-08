@@ -21,19 +21,19 @@ class InceptionSwitch {
   }
 
   logInUser() {
-    let temp;
     var options = {
       'method': 'POST',
       'url': 'http://121.200.28.54/api/v1/authentication/login',
       'headers': {
-      'Content-Type': 'application/json'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({"Username":"apiuser","Password":"NeoSoft1!2"})
     };
     
     request(options, async (error, response) => {
       if (error) throw new Error(error);
-  
+      
+      let temp;
       temp = JSON.parse(response.body);
 
       UserID = temp.UserID
@@ -58,11 +58,7 @@ class InceptionSwitch {
     request(options, (error, response) => {
       if (error) throw new Error(error);
 
-      let temp = JSON.parse(response.body)
-
-      allArea = temp
-      
-      // this.armArea();
+      allArea = JSON.parse(response.body)      
     });
 
   }
@@ -94,24 +90,11 @@ class InceptionSwitch {
         } catch(e) {
           reject(e);
         }
-  
-        // return JSON.parse(response.body)
-        // this.resData(JSON.parse(response.body))
-        // armedRes = JSON.parse(response.body)
       });
     })
     
   }
 
-  // resData(data) {
-  //   armedRes = data
-  // }
-  
-  // testResponse(data) {
-  //   let tempData  = JSON.parse(data)
-  //   return tempData
-  // }
-  
   getServices () {
     const informationService = new Service.AccessoryInformation()
         .setCharacteristic(Characteristic.Manufacturer, 'Inner Range')
@@ -142,7 +125,7 @@ class InceptionSwitch {
   setLockCharacteristicHandler (targetState, callback) {
     if (targetState == Characteristic.LockCurrentState.SECURED) {
       this.armArea().then((val) => {
-          this.log('TRUE =====> ',val);
+          this.log('TRUE =====> ',val.Response.Result);
       }).catch((err) => {
           this.log('ERR ====>',err);
       });
