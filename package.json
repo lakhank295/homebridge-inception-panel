@@ -1,6 +1,6 @@
 {
   "name": "homebridge-inception",
-  "version": "1.0.105",
+  "version": "1.0.106",
   "description": "Inception Panel Controller for Homebridge",
   "license": "ISC",
   "main": "index.js",

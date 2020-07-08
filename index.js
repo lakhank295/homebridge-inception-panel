@@ -99,7 +99,7 @@ class InceptionSwitch {
 
       var options = {
         'method': 'POST',
-        'url': 'http://121.200.28.54/api/v1/control/area/' + areaId + '/activity',
+        'url': 'http://121.200.28.54/api/v1/control/area/' + allArea[0].ID + '/activity',
         'headers': {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
