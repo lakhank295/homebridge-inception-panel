@@ -84,13 +84,22 @@ class InceptionSwitch {
       body: JSON.stringify({"Type":"ControlArea","AreaControlType":"Arm"})
     };
 
-    request(options, (error, response) => {
-      if (error) throw new Error(error);
-
-      // return JSON.parse(response.body)
-      // this.resData(JSON.parse(response.body))
-      armedRes = JSON.parse(response.body)
-    });
+    return new Promise((resolve, reject) => {
+      request(options, (error, response) => {
+        // if (error) throw new Error(error);
+        if (error) return reject(err);
+          
+        try {
+          resolve(JSON.parse(response.body))
+        } catch(e) {
+          reject(e);
+        }
+  
+        // return JSON.parse(response.body)
+        // this.resData(JSON.parse(response.body))
+        // armedRes = JSON.parse(response.body)
+      });
+    })
     
   }
 
@@ -132,9 +141,12 @@ class InceptionSwitch {
   // Lock Handler
   setLockCharacteristicHandler (targetState, callback) {
     if (targetState == Characteristic.LockCurrentState.SECURED) {
-      // armedRes = this.armArea();
-      // this.log('Arrma ======>', armedRes)
-      //  this.armArea()
+      this.armArea().then(function(val) {
+          this.log('TRUE =====> ',val);
+      }).catch(function(err) {
+          this.log('ERR ====>',err);
+      });
+
       this.log(`locking `+this.name, targetState)
       this.lockState = targetState
       this.updateCurrentState(this.lockState);
