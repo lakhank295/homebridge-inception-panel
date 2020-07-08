@@ -150,10 +150,23 @@ class InceptionSwitch {
   // Lock Handler
   setLockCharacteristicHandler (targetState, callback) {
     if (targetState == Characteristic.LockCurrentState.SECURED) {
+      this.armArea().then((val) => {
+        if(val.Response.Result == 'Success' && val.Response.Message == 'OK') {
+          this.lockState = targetState
+          this.updateCurrentState(this.lockState);
+          this.log('Locked ===>')
+          // this.log(`locking `+this.name, targetState)
+          // this.log(this.lockState+" "+this.name);
+        }
+      }).catch((err) => {
+          this.log('ERR ====>',err);
+      });
+    } else {
       this.disArmArea().then((val) => {
         if(val.Response.Result == 'Success' && val.Response.Message == 'OK') {
           this.lockState = targetState
           this.updateCurrentState(this.lockState);
+          this.log('Unlocked ===>')
 
           // this.log(`unlocking `+this.name, targetState)
           // this.log(this.lockState+" "+this.name);
@@ -161,18 +174,6 @@ class InceptionSwitch {
       }).catch((err) => {
         this.log('ERR ====>',err);
       })
-    } else {
-      this.armArea().then((val) => {
-        if(val.Response.Result == 'Success' && val.Response.Message == 'OK') {
-          this.lockState = targetState
-          this.updateCurrentState(this.lockState);
-
-          // this.log(`locking `+this.name, targetState)
-          // this.log(this.lockState+" "+this.name);
-        }
-      }).catch((err) => {
-          this.log('ERR ====>',err);
-      });
     }
     callback();
   }
