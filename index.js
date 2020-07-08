@@ -72,19 +72,19 @@ class InceptionSwitch {
     //   this.log('ID =====>', allArea[i].ID)
     //   this.log('NAME =====>', allArea[i].Name)
     // }
-
-    var options = {
-      'method': 'POST',
-      'url': 'http://121.200.28.54/api/v1/control/area/' + allArea[0].ID + '/activity',
-      'headers': {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Cookie': 'LoginSessId=' + UserID
-      },
-      body: JSON.stringify({"Type":"ControlArea","AreaControlType":"Arm"})
-    };
-
+    
     return new Promise((resolve, reject) => {
+      var options = {
+        'method': 'POST',
+        'url': 'http://121.200.28.54/api/v1/control/area/' + allArea[0].ID + '/activity',
+        'headers': {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Cookie': 'LoginSessId=' + UserID
+        },
+        body: JSON.stringify({"Type":"ControlArea","AreaControlType":"Arm"})
+      };
+
       request(options, (error, response) => {
         // if (error) throw new Error(error);
         if (error) return reject(err);
@@ -141,9 +141,9 @@ class InceptionSwitch {
   // Lock Handler
   setLockCharacteristicHandler (targetState, callback) {
     if (targetState == Characteristic.LockCurrentState.SECURED) {
-      this.armArea().then(function(val) {
+      this.armArea().then((val) => {
           this.log('TRUE =====> ',val);
-      }).catch(function(err) {
+      }).catch((err) => {
           this.log('ERR ====>',err);
       });
 
