@@ -82,8 +82,34 @@ class InceptionSwitch {
       };
 
       request(options, (error, response) => {
-        // if (error) throw new Error(error);
-        if (error) return reject(err);
+        if (error) return reject(error);
+          
+        try {
+          resolve(JSON.parse(response.body))
+        } catch(e) {
+          reject(e);
+        }
+      });
+    })    
+  }
+
+  
+  disArmArea() {
+    return new Promise((resolve, reject) => {
+
+      var options = {
+        'method': 'POST',
+        'url': 'http://121.200.28.54/api/v1/control/area/' + areaId + '/activity',
+        'headers': {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Cookie': 'LoginSessId=' + UserID
+        },
+        body: JSON.stringify({"Type":"ControlArea","AreaControlType":"Disarm"})
+      }
+
+      request(options, (error, response) => {
+        if (error) return reject(error);
           
         try {
           resolve(JSON.parse(response.body))
@@ -92,8 +118,8 @@ class InceptionSwitch {
         }
       });
     })
-    
   }
+
 
   getServices () {
     const informationService = new Service.AccessoryInformation()
@@ -124,22 +150,29 @@ class InceptionSwitch {
   // Lock Handler
   setLockCharacteristicHandler (targetState, callback) {
     if (targetState == Characteristic.LockCurrentState.SECURED) {
+      this.disArmArea().then((val) => {
+        if(val.Response.Result == 'Success' && val.Response.Message == 'OK') {
+          this.lockState = targetState
+          this.updateCurrentState(this.lockState);
+
+          // this.log(`unlocking `+this.name, targetState)
+          // this.log(this.lockState+" "+this.name);
+        }
+      }).catch((err) => {
+        this.log('ERR ====>',err);
+      })
+    } else {
       this.armArea().then((val) => {
-        // if(val.Response.Result == 'Success' && )
-          this.log('TRUE =====> ',val.Response);
+        if(val.Response.Result == 'Success' && val.Response.Message == 'OK') {
+          this.lockState = targetState
+          this.updateCurrentState(this.lockState);
+
+          // this.log(`locking `+this.name, targetState)
+          // this.log(this.lockState+" "+this.name);
+        }
       }).catch((err) => {
           this.log('ERR ====>',err);
       });
-
-      this.log(`locking `+this.name, targetState)
-      this.lockState = targetState
-      this.updateCurrentState(this.lockState);
-      this.log(this.lockState+" "+this.name);
-    } else {
-      this.log(`unlocking `+this.name, targetState)
-      this.lockState = targetState
-      this.updateCurrentState(this.lockState);
-      this.log(this.lockState+" "+this.name);
     }
     callback();
   }
