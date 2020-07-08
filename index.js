@@ -67,7 +67,7 @@ class InceptionSwitch {
 
   }
 
-  async armArea() {
+  armArea() {
     // for(var i = 0; i < allArea.length; i++) {
     //   this.log('ID =====>', allArea[i].ID)
     //   this.log('NAME =====>', allArea[i].Name)
@@ -133,9 +133,8 @@ class InceptionSwitch {
   setLockCharacteristicHandler (targetState, callback) {
     if (targetState == Characteristic.LockCurrentState.SECURED) {
       // armedRes = this.armArea();
-      await this.armArea()
-      this.log('Arrma ======', armedRes)
-
+      // this.log('Arrma ======>', armedRes)
+      //  this.armArea()
       this.log(`locking `+this.name, targetState)
       this.lockState = targetState
       this.updateCurrentState(this.lockState);
