@@ -86,9 +86,14 @@ class InceptionSwitch {
     request(options, (error, response) => {
       if (error) throw new Error(error);
 
-      armedRes = JSON.parse(response.body)
+      this.resData(JSON.parse(response.body))
+      // armedRes = JSON.parse(response.body)
     });
     
+  }
+
+  resData(data) {
+    armedRes = data
   }
   
   // testResponse(data) {
@@ -126,9 +131,9 @@ class InceptionSwitch {
   setLockCharacteristicHandler (targetState, callback) {
     if (targetState == Characteristic.LockCurrentState.SECURED) {
       this.armArea();
-      setTimeout(() => {
-        this.log('Arrma ======>', armedRes)
-      }, 1000);
+        
+      this.log('Arrma ======>', armedRes)
+      
       this.log(`locking `+this.name, targetState)
       this.lockState = targetState
       this.updateCurrentState(this.lockState);
