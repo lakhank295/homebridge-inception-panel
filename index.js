@@ -10,13 +10,13 @@ module.exports = (homebridge) => {
 }
 
 class InceptionSwitch {
-  constructor (log, config) {
+  constructor (log, config, accessories) {
     // get config values
     this.log = log;
     this.name = config['name'];
     this.lockService = new Service.LockMechanism(this.name);
     this.lockState = Characteristic.LockCurrentState.SECURED;
-
+    this.log('accessories =======>', accessories)
     this.logInUser();
   }
 
