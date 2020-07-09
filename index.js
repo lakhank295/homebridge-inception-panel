@@ -154,7 +154,7 @@ class InceptionSwitch {
         if(val.Response.Result == 'Success' && val.Response.Message == 'OK') {
           this.lockState = targetState
           this.updateCurrentState(this.lockState);
-          this.log('Locked ===>')
+
           // this.log(`locking `+this.name, targetState)
           // this.log(this.lockState+" "+this.name);
         }
@@ -166,7 +166,6 @@ class InceptionSwitch {
         if(val.Response.Result == 'Success' && val.Response.Message == 'OK') {
           this.lockState = targetState
           this.updateCurrentState(this.lockState);
-          this.log('Unlocked ===>')
 
           // this.log(`unlocking `+this.name, targetState)
           // this.log(this.lockState+" "+this.name);
