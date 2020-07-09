@@ -157,6 +157,7 @@ class InceptionGarageDoor {
         if(val.Response.Result == 'Success' && val.Response.Message == 'OK') {
           this.lockState = targetState
           this.updateCurrentState(this.lockState);
+          this.log('InceptionGarageDoor IF ====>');
 
           // this.log(`locking `+this.name, targetState)
           // this.log(this.lockState+" "+this.name);
@@ -169,6 +170,7 @@ class InceptionGarageDoor {
         if(val.Response.Result == 'Success' && val.Response.Message == 'OK') {
           this.lockState = targetState
           this.updateCurrentState(this.lockState);
+          this.log('InceptionGarageDoor ELSE IF ====>');
 
           // this.log(`unlocking `+this.name, targetState)
           // this.log(this.lockState+" "+this.name);
@@ -336,6 +338,7 @@ class InceptionSwitch {
         if(val.Response.Result == 'Success' && val.Response.Message == 'OK') {
           this.lockState = targetState
           this.updateCurrentState(this.lockState);
+          this.log('InceptionSwitch  IF ====>');
 
           // this.log(`locking `+this.name, targetState)
           // this.log(this.lockState+" "+this.name);
@@ -348,6 +351,7 @@ class InceptionSwitch {
         if(val.Response.Result == 'Success' && val.Response.Message == 'OK') {
           this.lockState = targetState
           this.updateCurrentState(this.lockState);
+          this.log('InceptionSwitch ELSE IF ====>');
 
           // this.log(`unlocking `+this.name, targetState)
           // this.log(this.lockState+" "+this.name);
