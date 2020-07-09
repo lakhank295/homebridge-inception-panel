@@ -23,7 +23,7 @@ class InceptionSwitch {
   logInUser() {
     var options = {
       'method': 'POST',
-      'url': 'http://121.200.28.54/api/v1/authentication/login',
+      'url': 'http://x.x.x.x/api/v1/authentication/login',
       'headers': {
         'Content-Type': 'application/json'
       },
@@ -48,7 +48,7 @@ class InceptionSwitch {
   getAllArea() {
     var options = {
       'method': 'GET',
-      'url': 'http://121.200.28.54/api/v1/control/area',
+      'url': 'http://x.x.x.x/api/v1/control/area',
       'headers': {
         'Accept': 'application/json',
         'Cookie': 'LoginSessId=' + UserID
@@ -72,7 +72,7 @@ class InceptionSwitch {
     return new Promise((resolve, reject) => {
       var options = {
         'method': 'POST',
-        'url': 'http://121.200.28.54/api/v1/control/area/' + allArea[0].ID + '/activity',
+        'url': 'http://x.x.x.x/api/v1/control/area/' + allArea[0].ID + '/activity',
         'headers': {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ class InceptionSwitch {
 
       var options = {
         'method': 'POST',
-        'url': 'http://121.200.28.54/api/v1/control/area/' + allArea[0].ID + '/activity',
+        'url': 'http://x.x.x.x/api/v1/control/area/' + allArea[0].ID + '/activity',
         'headers': {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
