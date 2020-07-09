@@ -16,7 +16,7 @@ class InceptionSwitch {
     this.name = config['name'];
     this.lockService = new Service.LockMechanism(this.name);
     this.lockState = Characteristic.LockCurrentState.SECURED;
-    this.log('accessories =======>', accessories)
+    this.accessories = accessories
     this.logInUser();
   }
 
@@ -149,6 +149,8 @@ class InceptionSwitch {
 
   // Lock Handler
   setLockCharacteristicHandler (targetState, callback) {
+    this.log('accessories =======>', this.accessories)
+
     if (targetState == Characteristic.LockCurrentState.SECURED) {
       this.armArea().then((val) => {
         if(val.Response.Result == 'Success' && val.Response.Message == 'OK') {
