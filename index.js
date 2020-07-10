@@ -122,8 +122,7 @@ class InceptionSwitch {
 
 
   getServices () {
-    for (var i = 0; i < 5; i++) {
-      const informationService = new Service.AccessoryInformation()
+    const informationService = new Service.AccessoryInformation()
         .setCharacteristic(Characteristic.Manufacturer, 'Inner Range')
         .setCharacteristic(Characteristic.Model, 'Inception Lock 1.0')
         .setCharacteristic(Characteristic.SerialNumber, '1234');
@@ -135,11 +134,9 @@ class InceptionSwitch {
         .on('get', this.getLockCharacteristicHandler.bind(this))
         .on('set', this.setLockCharacteristicHandler.bind(this));
         
-        
-        return [informationService, this.lockService]
-      }
-      this.logInUser();
-    
+        this.logInUser();
+
+    return [informationService, this.lockService]
   }
 
 
