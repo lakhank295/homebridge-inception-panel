@@ -1,7 +1,7 @@
 "use strict";
 
 const request = require('request');
-var Service, Characteristic, UserID, areaId, areaName, allArea, armedRes;
+var Service, Characteristic, UserID, areaId, areaName, allArea;
 
 module.exports = (homebridge) => {
   Service = homebridge.hap.Service
@@ -160,7 +160,7 @@ class InceptionSwitch {
           // this.log(this.lockState+" "+this.name);
         }
       }).catch((err) => {
-          this.log('ERR ====>',err);
+          this.log('ERR IF ====>',err);
       });
     } else {
       this.disArmArea().then((val) => {
@@ -172,7 +172,7 @@ class InceptionSwitch {
           // this.log(this.lockState+" "+this.name);
         }
       }).catch((err) => {
-        this.log('ERR ====>',err);
+        this.log('ERR ELSE ====>',err);
       })
     }
     callback();
