@@ -122,7 +122,8 @@ class InceptionSwitch {
 
 
   getServices () {
-    const informationService = new Service.AccessoryInformation()
+    for (var i = 0; i < 5; i++) {
+      const informationService = new Service.AccessoryInformation()
         .setCharacteristic(Characteristic.Manufacturer, 'Inner Range')
         .setCharacteristic(Characteristic.Model, 'Inception Lock 1.0')
         .setCharacteristic(Characteristic.SerialNumber, '1234');
@@ -134,9 +135,11 @@ class InceptionSwitch {
         .on('get', this.getLockCharacteristicHandler.bind(this))
         .on('set', this.setLockCharacteristicHandler.bind(this));
         
-        this.logInUser();
-
-    return [informationService, this.lockService]
+        
+        return [informationService, this.lockService]
+      }
+      this.logInUser();
+    
   }
 
 
@@ -149,16 +152,12 @@ class InceptionSwitch {
 
   // Lock Handler
   setLockCharacteristicHandler (targetState, callback) {
-    
-    
     if (targetState == Characteristic.LockCurrentState.SECURED) {
       this.armArea().then((val) => {
         if(val.Response.Result == 'Success' && val.Response.Message == 'OK') {
           this.lockState = targetState
           this.updateCurrentState(this.lockState);
           
-          this.log(`locking `+this.name, targetState)
-          this.log(this.lockState+" "+this.name);
           // this.log(`locking `+this.name, targetState)
           // this.log(this.lockState+" "+this.name);
         }
