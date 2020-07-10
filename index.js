@@ -150,15 +150,15 @@ class InceptionSwitch {
   // Lock Handler
   setLockCharacteristicHandler (targetState, callback) {
     
-          this.log(`locking `+this.name, targetState)
-          this.log(this.lockState+" "+this.name);
-          
+    
     if (targetState == Characteristic.LockCurrentState.SECURED) {
       this.armArea().then((val) => {
         if(val.Response.Result == 'Success' && val.Response.Message == 'OK') {
           this.lockState = targetState
           this.updateCurrentState(this.lockState);
-
+          
+          this.log(`locking `+this.name, targetState)
+          this.log(this.lockState+" "+this.name);
           // this.log(`locking `+this.name, targetState)
           // this.log(this.lockState+" "+this.name);
         }
