@@ -1,6 +1,9 @@
 "use strict";
 
 const request = require('request');
+const dotenv = require("dotenv")
+dotenv.config()
+
 var Service, Characteristic, UserID, areaId, areaName, allArea;
 
 module.exports = (homebridge) => {
@@ -23,11 +26,11 @@ class InceptionSwitch {
   logInUser() {
     var options = {
       'method': 'POST',
-      'url': 'http://121.200.28.54/api/v1/authentication/login',
+      'url': process.env.authAPI,
       'headers': {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({"Username":"apiuser","Password":"NeoSoft1!2"})
+      body: JSON.stringify({"Username": process.env.user,"Password": process.env.password})
     };
     
     request(options, async (error, response) => {
@@ -48,7 +51,7 @@ class InceptionSwitch {
   getAllArea() {
     var options = {
       'method': 'GET',
-      'url': 'http://121.200.28.54/api/v1/control/area',
+      'url': process.env.controlArea,
       'headers': {
         'Accept': 'application/json',
         'Cookie': 'LoginSessId=' + UserID
@@ -72,7 +75,7 @@ class InceptionSwitch {
     return new Promise((resolve, reject) => {
       var options = {
         'method': 'POST',
-        'url': 'http://121.200.28.54/api/v1/control/area/' + allArea[0].ID + '/activity',
+        'url': process.env.controlArea + '/' + allArea[0].ID + '/activity',
         'headers': {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -99,7 +102,7 @@ class InceptionSwitch {
 
       var options = {
         'method': 'POST',
-        'url': 'http://121.200.28.54/api/v1/control/area/' + allArea[0].ID + '/activity',
+        'url': process.env.controlArea + '/' + allArea[0].ID + '/activity',
         'headers': {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
