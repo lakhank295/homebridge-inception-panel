@@ -46,6 +46,7 @@ class InceptionSwitch {
       temp = JSON.parse(response.body);
 
       UserID = temp.UserID
+      this.log('User ID =>',UserID)
 
       if(UserID) {
         this.getAllArea();
@@ -95,6 +96,8 @@ class InceptionSwitch {
           
         try {
           resolve(JSON.parse(response.body))
+          this.log('Control Area Arm=>', response.body)
+
         } catch(e) {
           reject(e);
         }
@@ -122,6 +125,8 @@ class InceptionSwitch {
           
         try {
           resolve(JSON.parse(response.body))
+          this.log('Control Area Disarm=>', response.body)
+
         } catch(e) {
           reject(e);
         }
