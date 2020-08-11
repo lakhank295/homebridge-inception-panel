@@ -5,6 +5,12 @@
     "schema": {
         "type": "object",
         "properties": {
+            "name": {
+                "title": "Name",
+                "type": "string",
+                "required": true,
+                "description": "Switch Name"
+            },
             "authAPI": {
                 "title": "Login API URL",
                 "type": "string",
